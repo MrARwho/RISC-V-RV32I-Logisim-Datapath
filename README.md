@@ -27,7 +27,7 @@ This GitHub repository contains an RV32I Datapath built using Logisim, a popular
 
 The project structure is organized as follows:
 
-- Rv32I_datapath is the Logisim project file and associated subcircuits (ALU, Control Unit, Register File, Immediate Generator, etc.).
+- `rv32I_datapath.circ`: The Logisim project file containing the RV32I datapath and associated subcircuits (ALU, Control Unit, Register File, Immediate Generator, etc.).
 - `pics/`: Contains datapath diagrams and visual assets (`datapath.png`).
 
 ---
@@ -73,17 +73,17 @@ done:
 
 | Byte Offset | Machine Code (Hex) | Basic Code          | Original Assembly Code   | Description                                                  |
 | :---------- | :----------------- | :------------------ | :----------------------- | :----------------------------------------------------------- |
-| `0x00`    | `0x00500513`     | `addi x10, x0, 5` | `addi a0, zero, 5`     | Set$N = 5$ in register `a0` (`x10`)                    |
-| `0x04`    | `0x00000293`     | `addi x5, x0, 0`  | `addi t0, zero, 0`     | Initialize`previous = 0` in register `t0` (`x5`)       |
-| `0x08`    | `0x00100313`     | `addi x6, x0, 1`  | `addi t1, zero, 1`     | Initialize`current = 1` in register `t1` (`x6`)        |
-| `0x0C`    | `0x00000393`     | `addi x7, x0, 0`  | `addi t2, zero, 0`     | Initialize loop counter`i = 0` in register `t2` (`x7`) |
-| `0x10`    | `0x00a38c63`     | `beq x7, x10, 24` | `beq t2, a0, done`     | Branch to`done` (+24 bytes) if `i == N`                  |
-| `0x14`    | `0x00628e33`     | `add x28, x5, x6` | `add t3, t0, t1`       | Compute`next = previous + current` in `t3` (`x28`)     |
-| `0x18`    | `0x000302b3`     | `add x5, x6, x0`  | `add t0, t1, zero`     | Update`previous = current`                                 |
-| `0x1C`    | `0x000e0333`     | `add x6, x28, x0` | `add t1, t3, zero`     | Update`current = next`                                     |
-| `0x20`    | `0x00138393`     | `addi x7, x7, 1`  | `addi t2, t2, 1`       | Increment counter`i = i + 1`                               |
-| `0x24`    | `0xfe0006e3`     | `beq x0, x0, -20` | `beq zero, zero, loop` | Unconditional jump back to`loop` (-20 bytes)               |
-| `0x28`    | `0x000285b3`     | `add x11, x5, x0` | `add a1, t0, zero`     | Store final result (`5`) in `a1` (`x11`)               |
+| `0x00`      | `0x00500513`       | `addi x10, x0, 5`   | `addi a0, zero, 5`       | Set `N = 5` in register `a0` (`x10`)                         |
+| `0x04`      | `0x00000293`       | `addi x5, x0, 0`    | `addi t0, zero, 0`       | Initialize `previous = 0` in register `t0` (`x5`)            |
+| `0x08`      | `0x00100313`       | `addi x6, x0, 1`    | `addi t1, zero, 1`       | Initialize `current = 1` in register `t1` (`x6`)             |
+| `0x0C`      | `0x00000393`       | `addi x7, x0, 0`    | `addi t2, zero, 0`       | Initialize loop counter `i = 0` in register `t2` (`x7`)      |
+| `0x10`      | `0x00a38c63`       | `beq x7, x10, 24`   | `beq t2, a0, done`       | Branch to `done` (+24 bytes) if `i == N`                     |
+| `0x14`      | `0x00628e33`       | `add x28, x5, x6`   | `add t3, t0, t1`         | Compute `next = previous + current` in `t3` (`x28`)          |
+| `0x18`      | `0x000302b3`       | `add x5, x6, x0`    | `add t0, t1, zero`       | Update `previous = current`                                  |
+| `0x1C`      | `0x000e0333`       | `add x6, x28, x0`   | `add t1, t3, zero`       | Update `current = next`                                      |
+| `0x20`      | `0x00138393`       | `addi x7, x7, 1`    | `addi t2, t2, 1`         | Increment counter `i = i + 1`                                |
+| `0x24`      | `0xfe0006e3`       | `beq x0, x0, -20`   | `beq zero, zero, loop`   | Unconditional jump back to `loop` (-20 bytes)                |
+| `0x28`      | `0x000285b3`       | `add x11, x5, x0`   | `add a1, t0, zero`       | Store final result (`5`) in `a1` (`x11`)                     |
 
 ### Raw Hex Code (For Logisim RAM / Instruction Memory)
 
@@ -110,12 +110,12 @@ To get started with this RV32I Datapath project:
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/your-username/RISC-V-RV32i-Datapath.git
+   git clone https://github.com/MrARwho/RISC-V-RV32I-Logisim-Datapath.git
    ```
 2. **Open in Logisim**:
 
    - Launch Logisim (or Logisim-Evolution).
-   - Open the circuit file located at `Src/HSGPRO400.circ`.
+   - Open the circuit file located at `rv32I_datapath.circ`.
 3. **Simulate the Datapath**:
 
    - Load the raw hex instructions into the Instruction Memory / ROM component.
@@ -136,7 +136,7 @@ To get started with this RV32I Datapath project:
 
 To gain a deeper understanding of the RV32I datapath:
 
-- Explore the subcircuits inside `Src/HSGPRO400.circ` (Control Unit, ALU, Register File, Data Memory).
+- Explore the subcircuits inside `rv32I_datapath.circ` (Control Unit, ALU, Register File, Data Memory).
 - Test edge cases by modifying $N$ in `addi a0, zero, <N>` to compute other Fibonacci numbers.
 
 ---
